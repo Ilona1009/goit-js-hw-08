@@ -6,44 +6,30 @@ import SimpleLightbox from "simplelightbox";
 
 const divGallery = document.querySelector('.gallery');
 
-
-const creatуGallery = galleryItems.map(({preview, original, description}) => {
-        return `
-        <div class="gallery__item">
-            <a class="gallery__link" href="${original}">
-            <img
-                class="gallery__image"
-                src="${preview}"
-                data-source="${original}"
-                alt="${description}"
-            />
-            </a>
-        </div>
-        `;
-    });
-
-
-
-const stringGallery = creatуGallery.join('');
-divGallery.innerHTML = stringGallery;
+divGallery. innerHTML = creatуGallery(galleryItems)
 
 divGallery.addEventListener('click', onClickDivGallery);
 
-function onClickDivGallery(event){
-event.preventDefault();
-if (!event.target.classList.contains('gallery__image')){
-    return;
+
+
+function creatуGallery (galleryItems){
+  return galleryItems
+  .map(({preview, original, description}) => {
+    return `
+<a class="gallery__item" href="${original}">
+<img class="gallery__image" src="${preview}" alt="${description}" />
+</a>
+`;
+}).join('');
+
 }
 
-const instance = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250 });
+
+function onClickDivGallery(event){
+event.preventDefault();
+}
+
+var lightbox = new SimpleLightbox('.gallery a', { captionDelay:250, captionsData: "alt" });
 
 
-divGallery.addEventListener('keydown', onEscPressModalClose);
-    
-    function onEscPressModalClose(event) {
-        if (event.code === "Escape") {
-        instance.close();
-        divGallery.removeEventListener('keydown', onEscPressModalClose);
-        }
-    };
-};
+
