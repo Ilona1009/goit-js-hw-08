@@ -3,7 +3,7 @@ import Player from '@vimeo/player';
 import throttle from 'lodash.throttle';
 
     const iframe = document.querySelector('#vimeo-player');
-    const player = new Vimeo.Player(iframe);
+    const player = new Player(iframe);
 
     const KEY_STORAGE = 'videoplayer-current-time';
 
@@ -12,6 +12,10 @@ import throttle from 'lodash.throttle';
 }, 1000)
 );
 
-    // player.getVideoTitle().then(function(title) {
-    //     console.log('title:', title);
-    // });
+const getTimeMemory = localStorage.getItem(KEY_STORAGE);
+
+if(getTimeMemory !==null){
+    player.setCurrentTime(getTimeMemory)
+}
+
+;
