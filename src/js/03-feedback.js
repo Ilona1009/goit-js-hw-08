@@ -34,6 +34,9 @@ function onFormSubmit(evt){
   }
   evt.currentTarget.reset();
   localStorage.removeItem(KEY_STORAGE);
+
+  console.log(formData)
+
 }
 
 
@@ -48,6 +51,7 @@ function findLogic() {
             formMessage.value = getMeaning.message;
         }
     }
+
   }
   
 
